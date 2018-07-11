@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Java Cloud Demo App 0</title>
+		<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- including web3.js from node_modules -->
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+  </head>
+<body>
+    <div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted">Java Cloud Demo App 0</h3>
+      </div>
+			<!-- to display the 'Hello World' greeting -->
+      <div id="info"></div>
+    </div>
+  </body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    if (typeof web3 !== 'undefined') {
+      web3 = new Web3(web3.currentProvider);
+    } else {
+      web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+    };
+		// sets a default account to communicate from the 10 accounts given by ganache-cli
+    web3.eth.defaultAccount = web3.eth.accounts[0];
+    // need to get the Abstract Binary Interface (ABI) from smart contract and paste
+    var conferenceContract = web3.eth.contract([
+      {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "greet",
+        "outputs": [
+          {
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]);
+    // need to get the smart contract address and paste it in here
+    var conferences = conferenceContract.at('0x8bcd987cec1e47dcbfb33ed27e5477de59ce7ab4');
+		// access getBooksCount and update the html with the count
+    conferences.greet(function(err, result) {
+    if(!err)
+      $("#info").html(""+result);
+    });
+  </script>
+</html>

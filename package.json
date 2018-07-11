@@ -1,0 +1,14 @@
+{
+  "name": "jsa-demo-0",
+  "version": "1.0.0",
+  "description": "Smart contract example for a basic Hello World smart contract.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gerard de Jong",
+  "license": "Apache 2",
+  "dependencies": {
+    "web3": "github:ethereum/web3.js"
+  }
+}
